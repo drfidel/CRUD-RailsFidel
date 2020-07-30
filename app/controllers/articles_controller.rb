@@ -7,8 +7,10 @@ class ArticlesController < ApplicationController
         @articles = Article.all
     end
     
-    def def new
+    def new
+        @article = Article.new
     end
+    
 
     def create
         @article = Article.new(article_params)
