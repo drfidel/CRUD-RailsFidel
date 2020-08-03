@@ -10,7 +10,10 @@ class ArticlesController < ApplicationController
     def new
         @article = Article.new
     end
-    
+
+    def edit
+        @article = Article.find(params[:id])
+    end
 
     def create
         @article = Article.new(article_params)
@@ -22,6 +25,18 @@ class ArticlesController < ApplicationController
           flash[:error] = "Something went wrong"
           render 'new'
         end
+    end
+
+    def update
+        @article = Article.find(params[:id])
+
+        if @article.update(article_params)
+            flash[:success] = "Article successfully updated"
+            redirect_to @article
+          else
+            flash[:error] = "Something went wrong"
+            render 'edit'
+          end
     end
 
     private
